@@ -1,4 +1,28 @@
+/*
+ *    Copyright 2016 OICR
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
 'use strict';
+
+/**
+ * @ngdoc function
+ * @name dockstore.ui.controller:StarringCtrl
+ * @description
+ * # StarringCtrl
+ * Controller of the dockstore.ui
+ */
 
 angular.module('dockstore.ui')
   .controller('StarringCtrl', [
@@ -8,18 +32,86 @@ angular.module('dockstore.ui')
     'WorkflowService',
     'UserService',
     'StarringService',
-    function ($scope, $q, $auth, WorkflowService, UserService, StarringService) {
-      $scope.rate = 1;
+    'TokenService',
+    'ContainerService',
+    function ($scope, $q, $auth, WorkflowService, UserService, StarringService, TokenService, ContainerService) {
+      $scope.getStarring = function(user, workflowId)
+      {
+        return 0;
+        return StarringService.getStarring(workflowId)
+        .then(
+          function(starring) {
+            for (var star in starring){
+              if (user === star.user){
+                return 1;
+              }
+              return 0;
+            }
+          },
+          function(response) {
+            $scope.setWorkflowDetailsError(
+              'The webservice encountered an error trying to modify labels ' +
+              'for this workflow, please ensure that the label list is ' +
+              'properly-formatted and does not contain prohibited ' +
+              'characters of words.',
+              '[HTTP ' + response.status + '] ' + response.statusText + ': ' +
+              response.data
+            );
+            return $q.reject(response);
+          }
+        );
+      };
+      $scope.setStarring = function(userObj, workflowId, entryType){
+        $scope.workflow_rating1 = $scope.workflow_rating0 + $scope.rate;
+        if ($scope.rate === 0){
+          return StarringService.setUnstar($scope.userObj, workflowId, entryType);
+        }
+        else {
+          return StarringService.setStar($scope.userObj, workflowId, entryType);
+        }
+        return StarringService.setStarring($scope.userObj, workflowId, $scope.rate);
+      };
+      $scope.getWorkflowStars = function(workflowId, entryType){
+        return 100;
+        return StarringService.getStarring(workflowId)
+        .then(
+          function(starring) {
+            return starring.length;
+          },
+          function(response) {
+            $scope.setWorkflowDetailsError(
+              'The webservice encountered an error trying to modify labels ' +
+              'for this workflow, please ensure that the label list is ' +
+              'properly-formatted and does not contain prohibited ' +
+              'characters of words.',
+              '[HTTP ' + response.status + '] ' + response.statusText + ': ' +
+              response.data
+            );
+            return $q.reject(response);
+          }
+        );
+      };
+
+      $scope.userObj = UserService.getUserObj();
+      if ((typeof $scope.workflowObj) !== 'undefined'){
+        $scope.entryId = $scope.workflowObj.id;
+        $scope.entryType = 'workflow';
+      }
+      else {
+        $scope.entryId = $scope.containerObj.id;
+        $scope.entryType = 'container';
+      }
+      $scope.rate = $scope.getStarring($scope.userObj, $scope.entryId, $scope.entryType);
       $scope.max = 1;
       $scope.isReadonly = false;
-      $scope.userObj = UserService.getUserObj();
+      $scope.workflow_rating0 = $scope.getWorkflowStars($scope.entryId, $scope.entryType);
+      $scope.workflow_rating1 = $scope.workflow_rating0;
       $scope.hoveringOver = function(value) {
         $scope.overStar = value;
       };
-      $scope.setStarring = function(userObj, workflowId){
-        console.log(userObj);
-        return StarringService.setStarring(userObj, workflowId, $scope.rate);
-      };
+
+
+
     $scope.ratingStates = [
       {stateOn: 'glyphicon-star', stateOff: 'glyphicon-star-empty'}
   ];

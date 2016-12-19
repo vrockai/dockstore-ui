@@ -28,7 +28,8 @@ angular.module('dockstore.ui')
       restrict: 'AE',
       controller: 'StarringCtrl',
       scope: {
-        workflowObj: '='
+        workflowObj: '=',
+        containerObj: '='
       },
 
       link: function postLink(scope, element, attrs) {

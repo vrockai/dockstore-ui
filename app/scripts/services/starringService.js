@@ -18,7 +18,7 @@
 
 /**
  * @ngdoc service
- * @name dockstore.ui.WorkflowService
+ * @name dockstore.ui.StarringService
  * @description
  * # StarringService
  * Service in the dockstore.ui.
@@ -29,24 +29,56 @@ angular.module('dockstore.ui')
       '$http',
       'WebService',
       function ($q, $http, WebService) {
-
-    this.setStarring = function(userId, workflowId, rate) {
+        this.getStarring = function(entryId, entryType)
+        {
+          return {};
+          return $q(function(resolve, reject) {
+            $http({
+              method: 'GET',
+              url: WebService.API_URI + '/' + entryType + 's/' + entryId + '/starring',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }).then(function(response) {
+              resolve(response.data);
+            }, function(response) {
+              reject(response);
+            });
+        });
+        };
+      this.setStar = function(user, entryId, entryType) {
+        return $q(function(resolve, reject) {
+          $http({
+            method: 'PUT',
+            url: WebService.API_URI + '/' + entryType + 's/' + entryId + '/star',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: {
+              containerId: entryId,
+              workflowId: entryId
+            }
+          });
+      });
+    };
+    this.setUnstar = function(user, entryId, entryType) {
       return $q(function(resolve, reject) {
         $http({
-          method: 'POST',
-          url: WebService.API_URI + '/users/' + userId,
+          method: 'DELETE',
+          url: WebService.API_URI + '/' + entryType + 's/' + entryId + '/unstar',
           headers: {
             'Content-Type': 'application/json'
           },
           data: {
-            workflowId: workflowId
+            containerId: entryId,
+            workflowId: entryId
           }
         }).then(function(response) {
           resolve(response.data);
         }, function(response) {
           reject(response);
         });
-      });
-    };
+    });
+  };
 
   }]);
