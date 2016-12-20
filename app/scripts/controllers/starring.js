@@ -29,12 +29,9 @@ angular.module('dockstore.ui')
     '$scope',
     '$q',
     '$auth',
-    'WorkflowService',
     'UserService',
     'StarringService',
-    'TokenService',
-    'ContainerService',
-    function($scope, $q, $auth, WorkflowService, UserService, StarringService, TokenService, ContainerService) {
+    function($scope, $q, $auth, UserService, StarringService) {
 
       /**
        * This function checks whether the user starred the workflow/tool
