@@ -61,25 +61,18 @@ angular.module('dockstore.ui')
         );
       };
       $scope.setStarring = function(userObj, entryId, entryType) {
-        $scope.setStar(userObj,entryId, entryType).then(
-        $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data) {
-          $scope.total_stars = data;
-        }));
+        $scope.setStar(userObj,entryId, entryType).then(function(data) {
+          $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data2) {
+              $scope.total_stars = data2;
+          });
+        });
       };
       $scope.setStar = function(userObj, entryId, entryType){
         if ($scope.rate === 0){
-          StarringService.setUnstar($scope.userObj, entryId, entryType).then(function(data) {
-            $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data2) {
-                $scope.total_stars = data2;
-            });
-          });
+          return StarringService.setUnstar($scope.userObj, entryId, entryType);
         }
         else {
-          return StarringService.setStar($scope.userObj, entryId, entryType).then(function(data){
-            $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data2) {
-                $scope.total_stars = data2;
-            });
-          });
+          return StarringService.setStar($scope.userObj, entryId, entryType);
         }
       };
       $scope.getStarredUsers = function(userObj, entryId, entryType){
