@@ -33,7 +33,14 @@ angular.module('dockstore.ui')
       },
 
       link: function postLink(scope, element, attrs) {
-
+        scope.$watch('rate', function(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            //scope.setStarring(scope.userObj, scope.entryId, scope.entryType);
+            //scope.getStarredUsers(scope.userObj, scope.entryId, scope.entryType).then(function(data2) {
+            //  scope.total_stars = data2;
+            //});
+          }
+        });
       },
       templateUrl: 'templates/starring.html'
     };

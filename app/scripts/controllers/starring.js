@@ -35,14 +35,13 @@ angular.module('dockstore.ui')
     'TokenService',
     'ContainerService',
     function ($scope, $q, $auth, WorkflowService, UserService, StarringService, TokenService, ContainerService) {
-      $scope.getStarring = function(user, workflowId)
+      $scope.getStarring = function(user, workflowId, entryType)
       {
-        return 0;
-        return StarringService.getStarring(workflowId)
+        return StarringService.getStarring(user, workflowId, entryType)
         .then(
           function(starring) {
             for (var star in starring){
-              if (user === star.user){
+              if (user.id === starring[star].id){
                 return 1;
               }
               return 0;
@@ -61,19 +60,30 @@ angular.module('dockstore.ui')
           }
         );
       };
-      $scope.setStarring = function(userObj, workflowId, entryType){
-        $scope.workflow_rating1 = $scope.workflow_rating0 + $scope.rate;
+      $scope.setStarring = function(userObj, entryId, entryType) {
+        $scope.setStar(userObj,entryId, entryType).then(
+        $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data) {
+          $scope.total_stars = data;
+        }));
+      };
+      $scope.setStar = function(userObj, entryId, entryType){
         if ($scope.rate === 0){
-          return StarringService.setUnstar($scope.userObj, workflowId, entryType);
+          StarringService.setUnstar($scope.userObj, entryId, entryType).then(function(data) {
+            $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data2) {
+                $scope.total_stars = data2;
+            });
+          });
         }
         else {
-          return StarringService.setStar($scope.userObj, workflowId, entryType);
+          return StarringService.setStar($scope.userObj, entryId, entryType).then(function(data){
+            $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data2) {
+                $scope.total_stars = data2;
+            });
+          });
         }
-        return StarringService.setStarring($scope.userObj, workflowId, $scope.rate);
       };
-      $scope.getWorkflowStars = function(workflowId, entryType){
-        return 100;
-        return StarringService.getStarring(workflowId)
+      $scope.getStarredUsers = function(userObj, entryId, entryType){
+        return StarringService.getStarring(userObj, entryId, entryType)
         .then(
           function(starring) {
             return starring.length;
@@ -101,11 +111,14 @@ angular.module('dockstore.ui')
         $scope.entryId = $scope.containerObj.id;
         $scope.entryType = 'container';
       }
-      $scope.rate = $scope.getStarring($scope.userObj, $scope.entryId, $scope.entryType);
+      $scope.getStarring($scope.userObj, $scope.entryId, $scope.entryType).then(function(data) {
+        $scope.rate=data;
+      });
       $scope.max = 1;
       $scope.isReadonly = false;
-      $scope.workflow_rating0 = $scope.getWorkflowStars($scope.entryId, $scope.entryType);
-      $scope.workflow_rating1 = $scope.workflow_rating0;
+      $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data) {
+        $scope.total_stars = data;
+      });
       $scope.hoveringOver = function(value) {
         $scope.overStar = value;
       };

@@ -29,13 +29,13 @@ angular.module('dockstore.ui')
       '$http',
       'WebService',
       function ($q, $http, WebService) {
-        this.getStarring = function(entryId, entryType)
+        this.getStarring = function(user, entryId, entryType)
         {
-          return {};
+          console.log(WebService.API_URI + '/' + entryType + 's/' + entryId + '/starredUsers');
           return $q(function(resolve, reject) {
             $http({
               method: 'GET',
-              url: WebService.API_URI + '/' + entryType + 's/' + entryId + '/starring',
+              url: WebService.API_URI + '/' + entryType + 's/' + entryId + '/starredUsers',
               headers: {
                 'Content-Type': 'application/json'
               }
@@ -58,6 +58,10 @@ angular.module('dockstore.ui')
               containerId: entryId,
               workflowId: entryId
             }
+          }).then(function(response) {
+            resolve(response.data);
+          }, function(response) {
+            reject(response);
           });
       });
     };
