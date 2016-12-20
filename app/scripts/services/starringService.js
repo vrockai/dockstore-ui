@@ -25,27 +25,26 @@
  */
 angular.module('dockstore.ui')
   .service('StarringService', [
-      '$q',
-      '$http',
-      'WebService',
-      function ($q, $http, WebService) {
-        this.getStarring = function(user, entryId, entryType)
-        {
-          console.log(WebService.API_URI + '/' + entryType + 's/' + entryId + '/starredUsers');
-          return $q(function(resolve, reject) {
-            $http({
-              method: 'GET',
-              url: WebService.API_URI + '/' + entryType + 's/' + entryId + '/starredUsers',
-              headers: {
-                'Content-Type': 'application/json'
-              }
-            }).then(function(response) {
-              resolve(response.data);
-            }, function(response) {
-              reject(response);
-            });
+    '$q',
+    '$http',
+    'WebService',
+    function($q, $http, WebService) {
+      this.getStarring = function(user, entryId, entryType) {
+        console.log(WebService.API_URI + '/' + entryType + 's/' + entryId + '/starredUsers');
+        return $q(function(resolve, reject) {
+          $http({
+            method: 'GET',
+            url: WebService.API_URI + '/' + entryType + 's/' + entryId + '/starredUsers',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }).then(function(response) {
+            resolve(response.data);
+          }, function(response) {
+            reject(response);
+          });
         });
-        };
+      };
       this.setStar = function(user, entryId, entryType) {
         return $q(function(resolve, reject) {
           $http({
@@ -63,26 +62,27 @@ angular.module('dockstore.ui')
           }, function(response) {
             reject(response);
           });
-      });
-    };
-    this.setUnstar = function(user, entryId, entryType) {
-      return $q(function(resolve, reject) {
-        $http({
-          method: 'DELETE',
-          url: WebService.API_URI + '/' + entryType + 's/' + entryId + '/unstar',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          data: {
-            containerId: entryId,
-            workflowId: entryId
-          }
-        }).then(function(response) {
-          resolve(response.data);
-        }, function(response) {
-          reject(response);
         });
-    });
-  };
+      };
+      this.setUnstar = function(user, entryId, entryType) {
+        return $q(function(resolve, reject) {
+          $http({
+            method: 'DELETE',
+            url: WebService.API_URI + '/' + entryType + 's/' + entryId + '/unstar',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: {
+              containerId: entryId,
+              workflowId: entryId
+            }
+          }).then(function(response) {
+            resolve(response.data);
+          }, function(response) {
+            reject(response);
+          });
+        });
+      };
 
-  }]);
+    }
+  ]);

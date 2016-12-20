@@ -18,28 +18,23 @@
 
 /**
  * @ngdoc directive
- * @name dockstore.ui.directive:starring
+ * @name dockstore.ui.directive:starredEntries
  * @description
- * # starring
+ * # starredEntries
  */
 angular.module('dockstore.ui')
-  .directive('starring', function() {
+  .directive('starredEntries', function() {
     return {
       restrict: 'AE',
-      controller: 'StarringCtrl',
+      controller: 'StarredEntriesCtrl',
       scope: {
         workflowObj: '=',
-        containerObj: '=',
-        starGazers: '='
+        containerObj: '='
       },
 
       link: function postLink(scope, element, attrs) {
-        scope.$watch('rate', function(newValue, oldValue) {
-          if (newValue !== oldValue) {
-            scope.setStarring(scope.userObj, scope.entryId, scope.entryType);
-          }
-        });
+
       },
-      templateUrl: 'templates/starring.html'
+      templateUrl: 'templates/starredentries.html'
     };
   });
