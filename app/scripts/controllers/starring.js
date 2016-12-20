@@ -152,11 +152,11 @@ angular.module('dockstore.ui')
       }];
 
       /**
-       * scope - description
+       * Gets stargazers of this workflow/tool.
        *
-       * @param  {type} entryId   description
-       * @param  {type} entryType description
-       * @return {type}           description
+       * @param  {type} entryId   Workflow/tool ID
+       * @param  {type} entryType "Workflow" or "Tool"
+       * @return {type}           None
        */
       $scope.getStargazers = function(entryId, entryType) {
         return StarringService.getStarring($scope.userObj, entryId, entryType)

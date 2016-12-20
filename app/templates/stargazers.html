@@ -1,4 +1,16 @@
-<p class="text-center">Stargazers</p>
-<ul ng-repeat="stargazer in starGazers.users">
-  <li>{{stargazer.id}}</li>
-</ul>
+<script src="js/md5.min.js"></script>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading text-center">Stargazers</div>
+  <!-- Table -->
+  <div ng-repeat="stargazer in starGazers.users">
+    <div class="clearfix" ng-if="$index % 4 == 0"></div>
+    <img class="col-md-3" ng-if="stargazer.gravatarUrl" src={{stargazer.gravatarUrl}}/>
+    <img class="col-md-3" ng-if="!stargazer.gravatarUrl" src={{stargazer.avatarUrl}}/>
+  </div>
+</div>
+
+<div class="alert alert-info" role="alert" ng-if="starGazers.users.length==0">
+  <span class="glyphicon glyphicon-warning-sign"></span>
+  There are no stargazers for this entry.
+</div>
