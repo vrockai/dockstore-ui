@@ -37,6 +37,7 @@ angular.module('dockstore.ui')
     function ($scope, $q, $auth, $location, $window,
         UserService, TokenService, WebService, NtfnService) {
 
+      $scope.syncingWithGithub = false;
       $scope.userObj = UserService.getUserObj();
 
       $scope.linkGitHubAccount = function() {
@@ -76,5 +77,17 @@ angular.module('dockstore.ui')
             $scope.tokenSetComplete = tokenStatusSet.github;
           }
         );
+
+      $scope.updateUserMetadata = function() {
+        $scope.syncingWithGithub = true;
+        UserService.updateUserMetadata()
+        .then(
+          function(user) {
+            $scope.userObj = user;
+            UserService.setUserObj(user);
+            $scope.syncingWithGithub = false;
+          }
+        );
+      };
 
   }]);

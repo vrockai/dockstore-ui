@@ -62,6 +62,19 @@ angular.module('dockstore.ui')
         });
       };
 
+      this.updateUserMetadata = function() {
+        return $q(function(resolve, reject) {
+          $http({
+            method: 'GET',
+            url: WebService.API_URI + '/users/user/updateUserMetatdata'
+          }).then(function(response) {
+            resolve(response.data);
+          }, function(response) {
+            reject(response);
+          });
+        });
+      }
+
       this.setUserObj = function(userObj) {
         $rootScope.$broadcast('userObjChange', userObj);
         localStorageService.set('userObj', userObj);
