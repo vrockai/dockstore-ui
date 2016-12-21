@@ -3,13 +3,28 @@
   <!-- Default panel contents -->
   <div class="panel-heading text-center">Stargazers</div>
   <!-- Table -->
+  <div class="panel-body">
   <div ng-repeat="stargazer in starGazers.users">
-    <div class="clearfix" ng-if="$index % 4 == 0"></div>
-    <img class="col-md-3" ng-if="stargazer.gravatarUrl" src={{stargazer.gravatarUrl}}/>
-    <img class="col-md-3" ng-if="!stargazer.gravatarUrl" src={{stargazer.avatarUrl}}/>
+
+    <div class="thumbnail col-md-3">
+      <img ng-if="stargazer.gravatarUrl" src={{stargazer.gravatarUrl}} />
+      <img ng-if="!stargazer.gravatarUrl" src={{stargazer.avatarUrl}} />
+    <div class="caption">
+        <h5>{{stargazer.username}}</h5>
+    </div>
+  </div>
   </div>
 </div>
+</div>
 
+<!-- <div id="container-pagination" ng-show="!previewMode">
+  <div class="container">
+    <div class="row-center">
+      <ul ng-show="getLastPage() > 5" uib-pagination total-items="entryCount" rotate="false" ng-model="currPage" items-per-page="numContsPage" force-ellipses="true" max-size="5" boundary-links="true" direction-links="false" boundary-link-numbers="true"></ul>
+      <ul ng-show="getLastPage() < 6" uib-pagination total-items="entryCount" rotate="false" ng-model="currPage" items-per-page="numContsPage" direction-links="false"></ul>
+    </div>
+  </div>
+</div> -->
 <div class="alert alert-info" role="alert" ng-if="starGazers.users.length==0">
   <span class="glyphicon glyphicon-warning-sign"></span>
   There are no stargazers for this entry.

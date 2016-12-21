@@ -26,6 +26,7 @@ angular.module('dockstore.ui')
   .directive('stargazers', function() {
     return {
       restrict: 'AE',
+      //controller: 'StargazersCtrl',
       scope: {
         workflowObj: '=',
         containerObj: '=',
