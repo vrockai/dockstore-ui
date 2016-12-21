@@ -93,7 +93,7 @@
        ng-if="editMode">
     <h3>
       <div class="pull-right">
-        <starring workflow-obj="workflowObj"></starring>
+        <starring workflow-obj="workflowObj" star-gazers="starGazers"></starring>
         <div class="btn-group" role="group">
 
           <button id="publishButton" uib-btn-checkbox
@@ -134,7 +134,8 @@
     </h3>
   </div>
 </div>
-<div class="row" ng-show="workflowObj">
+<stargazers workflow-obj="workflowObj" star-gazers="starGazers" ng-if="starGazers.clicked"></stargazers>
+<div class="row" ng-show="workflowObj" ng-if="!starGazers.clicked">
   <div class="ds-tabs" ng-class="editMode ? 'col-md-12' : 'col-md-9'">
     <uib-tabset justified="true">
       <uib-tab active="activeTabs[0]" id="infoTab">
