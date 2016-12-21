@@ -1,0 +1,41 @@
+<h1 class="text-center">Starred Tools and Workflows</h1>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading text-center">Starred Tools</div>
+  <!-- Table -->
+  <div class="panel-body">
+    <div ng-repeat="entries in starredTools">
+      <div class="row">
+        <div class="col-md-4">
+          <h5>{{entries.name}}</h5>
+          <h5>{{entries.namespace}}</h5>
+        </div>
+        <div class="col-md-4"></div>
+        <starring class="col-md-4" container-obj="entries"></starring>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading text-center">Starred Workflows</div>
+  <!-- Table -->
+  <div class="panel-body">
+    <div ng-repeat="entries in starredWorkflows">
+      <div ng-if="entries.repository" class="row">
+        <div class="col-md-4">
+          <h5>{{entries.repository}}</h5>
+          <h5>{{entries.organization}}</h5>
+        </div>
+        <div class="col-md-4"></div>
+        <starring class="col-md-4" workflow-obj="entries"></starring>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<div class="alert alert-info" role="alert" ng-if="starredEntries.length==0">
+<span class="glyphicon glyphicon-warning-sign"></span>
+There are no starred entries for this user.
+</div>

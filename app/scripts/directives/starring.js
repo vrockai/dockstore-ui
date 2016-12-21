@@ -36,7 +36,29 @@ angular.module('dockstore.ui')
       link: function postLink(scope, element, attrs) {
         scope.$watch('rate', function(newValue, oldValue) {
           if (newValue !== oldValue) {
-            scope.setStarring(scope.userObj, scope.entryId, scope.entryType);
+            // scope.setStarring(scope.userObj, scope.entryId, scope.entryType);
+          }
+        });
+        scope.$watch('containerObj.id', function(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            scope.entryId = newValue;
+            scope.getStarring(scope.userObj, scope.entryId, scope.entryType).then(function(data) {
+              scope.rate = data;
+            });
+            scope.getStarredUsers(scope.userObj, scope.entryId, scope.entryType).then(function(data) {
+              scope.total_stars = data;
+            });
+          }
+        });
+        scope.$watch('workflowObj.id', function(newValue, oldValue) {
+          if (newValue !== oldValue) {
+            scope.entryId = newValue;
+            scope.getStarring(scope.userObj, scope.entryId, scope.entryType).then(function(data) {
+              scope.rate = data;
+            });
+            scope.getStarredUsers(scope.userObj, scope.entryId, scope.entryType).then(function(data) {
+              scope.total_stars = data;
+            });
           }
         });
       },

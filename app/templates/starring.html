@@ -1,4 +1,4 @@
 <div class=btn-group>
-  <div class="btn btn-default" uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" aria-labelledby="default-rating"></div>
+  <div class="btn btn-default" ng-click="setStarring(userObj, entryId, entryType)" uib-rating ng-model="rate" max="max" read-only="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null" aria-labelledby="default-rating"></div>
   <button type="button" ng-click="getStargazers(entryId, entryType)" class="btn btn-default">{{total_stars}}</button>
 </div>

@@ -33,8 +33,8 @@ angular.module('dockstore.ui')
     'localStorageService',
     'WebService',
     'NotificationService',
-    function ($rootScope, $auth, $q, $http, $location, localStorageService,
-                WebService, NtfnService) {
+    function($rootScope, $auth, $q, $http, $location, localStorageService,
+      WebService, NtfnService) {
 
       this.getUserById = function(userId) {
         return $q(function(resolve, reject) {
@@ -73,7 +73,7 @@ angular.module('dockstore.ui')
             reject(response);
           });
         });
-      }
+      };
 
       this.setUserObj = function(userObj) {
         $rootScope.$broadcast('userObjChange', userObj);
@@ -102,5 +102,29 @@ angular.module('dockstore.ui')
             }
           });
       };
-
-  }]);
+      this.getStarredWorkflows = function() {
+        return $q(function(resolve, reject) {
+          $http({
+            method: 'GET',
+            url: WebService.API_URI + '/users/starredWorkflows/'
+          }).then(function(response) {
+            resolve(response.data);
+          }, function(response) {
+            reject(response);
+          });
+        });
+      };
+      this.getStarredTools = function() {
+        return $q(function(resolve, reject) {
+          $http({
+            method: 'GET',
+            url: WebService.API_URI + '/users/starredTools/'
+          }).then(function(response) {
+            resolve(response.data);
+          }, function(response) {
+            reject(response);
+          });
+        });
+      };
+    }
+  ]);

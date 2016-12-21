@@ -76,6 +76,7 @@ angular.module('dockstore.ui')
        * @return {type}           Void
        */
       $scope.setStarring = function(userObj, entryId, entryType) {
+        console.log("stuff");
         $scope.setStar(userObj, entryId, entryType).then(function(data) {
           $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data2) {
             $scope.total_stars = data2;
