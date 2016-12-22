@@ -54,7 +54,6 @@ angular.module('dockstore.ui')
           .then(
             function(starring) {
               for (var star in starring) {
-              console.log("does " + userObj.id + " match " + starring[star].id);
                 if (userObj.id === starring[star].id) {
                   return 1;
                 }
