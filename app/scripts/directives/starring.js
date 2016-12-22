@@ -34,18 +34,7 @@ angular.module('dockstore.ui')
       },
 
       link: function postLink(scope, element, attrs) {
-        scope.$watch('containerObj', function(newValue, oldValue) {
-          if (newValue !== oldValue) {
-            scope.setDocument();
-            scope.getStarring(scope.userObj, scope.entryId, scope.entryType).then(function(data) {
-              scope.rate = data;
-            });
-            scope.getStarredUsers(scope.userObj, scope.entryId, scope.entryType).then(function(data) {
-              scope.total_stars = data;
-            });
-          }
-        });
-        scope.$watch('workflowObj', function(newValue, oldValue) {
+        scope.$watchGroup(['containerObj', 'workflowObj'], function(newValue, oldValue) {
           if (newValue !== oldValue) {
             scope.setDocument();
             scope.getStarring(scope.userObj, scope.entryId, scope.entryType).then(function(data) {
