@@ -17,23 +17,23 @@
 'use strict';
 
 /**
- * @ngdoc directive
- * @name dockstore.ui.directive:stagazers
+ * @ngdoc function
+ * @name dockstore.ui.controller:LoginCtrl
  * @description
- * # stargazers
+ * # LoginCtrl
+ * Controller of the dockstore.ui
  */
 angular.module('dockstore.ui')
-  .directive('stargazers', function() {
-    return {
-      restrict: 'AE',
-      //controller: 'StargazersCtrl',
-      scope: {
-        workflowObj: '=',
-        containerObj: '=',
-        starGazers: '='
-      },
+  .controller('StarredCtrl', [
+    '$scope',
+    '$auth',
+    '$location',
+    '$window',
+    'UserService',
+    'NotificationService',
+    function($scope, $auth, $location, $window,
+      UserService, NtfnService) {
 
-      link: function postLink(scope, element, attrs) {},
-      templateUrl: 'templates/stargazers.html'
-    };
-  });
+
+    }
+  ]);
