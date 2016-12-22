@@ -14,11 +14,11 @@
   <div class="row">
     <h3>Starred Tools</h3>
     <div ng-repeat="entries in starredTools">
-      <div class="col-md-4 col-sm-4">
-      <div ng-if="starredTools.length>0" class="panel panel-default">
+      <div ng-if="entries.is_published" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <div class="panel panel-default">
         <div class="panel-body">
           <starring class="pull-right" container-obj="entries"></starring>
-          <h3>{{entries.name}}</h3>
+          <h3><a href="/containers/{{entries.tool_path}}">{{entries.name}}</a></h3>
           <p>{{entries.namespace}}</p>
           <p>source-code-repository</p>
           <p>registry</p>
@@ -34,8 +34,8 @@
 <div class="row">
   <h3>Starred Workflows</h3>
   <div ng-repeat="entries in starredWorkflows">
-    <div class="col-md-4 col-sm-4">
-    <div ng-if="starredWorkflows.length>0" class="panel panel-default">
+    <div ng-if="entries.is_published" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+    <div class="panel panel-default">
       <div class="panel-body">
         <starring class="pull-right" workflow-obj="entries"></starring>
         <h3>{{entries.repository}}</h3>
@@ -47,6 +47,7 @@
     </div>
   </div>
 </div>
+
 <!-- <div ng-repeat="entries in starredWorkflows" class="col-md-4" styles="padding:0px;">
   <div ng-if="starredWorkflows.length>0" class="panel panel-default " style="margin:5px">
     <div class="code-holder panel-body" style="margin:10px">
