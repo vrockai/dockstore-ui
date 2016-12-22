@@ -1,51 +1,67 @@
-<h1 class="text-center">Starred Tools and Workflows</h1>
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading text-center">Starred Tools</div>
-  <!-- Table -->
-  <div class="panel-body">
-    <div ng-repeat="entries in starredTools">
-      <div class="row">
-        <div class="col-md-4">
-          <h5>{{entries.name}}</h5>
-          <h5>{{entries.namespace}}</h5>
-        </div>
-        <div class="col-md-4">
-          <h5>source-code-repository</h5>
-          <h5>registry</h5>
-        </div>
-        <starring class="col-md-4" container-obj="entries"></starring>
+<div id="container-header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3 class="available-containers">
+          <span class="glyphicon glyphicon-star"></span>
+          Starred Tools and Workflows
+        </h3>
       </div>
     </div>
   </div>
-  <div class="alert alert-info" role="alert" ng-if="starredTools.length==0">
+</div>
+<div class="container view-content">
+  <div class="row">
+    <h3>Starred Tools</h3>
+    <div ng-repeat="entries in starredTools">
+      <div class="col-md-4 col-sm-4">
+      <div ng-if="starredTools.length>0" class="panel panel-default">
+        <div class="panel-body">
+          <starring class="pull-right" container-obj="entries"></starring>
+          <h3>{{entries.name}}</h3>
+          <p>{{entries.namespace}}</p>
+          <p>source-code-repository</p>
+          <p>registry</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+<div class="alert alert-info" role="alert" ng-if="starredWorkflows.length==0">
   <span class="glyphicon glyphicon-warning-sign"></span>
-  There are no starred tools for this user.
+  There are no starred workflows for this user.
+</div>
+<div class="row">
+  <h3>Starred Workflows</h3>
+  <div ng-repeat="entries in starredWorkflows">
+    <div class="col-md-4 col-sm-4">
+    <div ng-if="starredWorkflows.length>0" class="panel panel-default">
+      <div class="panel-body">
+        <starring class="pull-right" workflow-obj="entries"></starring>
+        <h3>{{entries.repository}}</h3>
+        <p>{{entries.organization}}</p>
+        <p>source-code-repository</p>
+        <p>registry</p>
+      </div>
+    </div>
+    </div>
   </div>
 </div>
-<div class="panel panel-default">
-  <!-- Default panel contents -->
-  <div class="panel-heading text-center">Starred Workflows</div>
-  <!-- Table -->
-  <div class="panel-body">
-    <div ng-repeat="entries in starredWorkflows">
-      <div ng-if="entries.repository" class="row">
-        <div class="col-md-4">
-          <h5>{{entries.repository}}</h5>
-          <h5>{{entries.organization}}</h5>
-        </div>
-        <div class="col-md-4">
-          <h5>source-code-repository</h5>
-          <h5>registry</h5>
-        </div>
-        <starring class="col-md-4" workflow-obj="entries"></starring>
+<!-- <div ng-repeat="entries in starredWorkflows" class="col-md-4" styles="padding:0px;">
+  <div ng-if="starredWorkflows.length>0" class="panel panel-default " style="margin:5px">
+    <div class="code-holder panel-body" style="margin:10px">
+      <div ng-if="entries.repository" class="row" style="padding-left:1px;padding-right:1px; padding-top:2px;padding-bottom:2px;">
+        <starring class="code-copy-button" workflow-obj="entries"></starring>
+        <h5>{{entries.repository}}</h5>
+        <p>{{entries.organization}}</p>
+        <p>source-code-repository</p>
+        <p>registry</p>
       </div>
     </div>
   </div>
   <div class="alert alert-info" role="alert" ng-if="starredWorkflows.length==0">
-  <span class="glyphicon glyphicon-warning-sign"></span>
-  There are no starred workflows for this user.
+    <span class="glyphicon glyphicon-warning-sign"></span>
+    There are no starred workflows for this user.
   </div>
-</div>
-</div>
+</div> -->
 </div>
