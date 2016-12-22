@@ -32,6 +32,13 @@ angular.module('dockstore.ui')
     'UserService',
     'StarringService',
     function($scope, $q, $auth, UserService, StarringService) {
+      $scope.userObj = UserService.getUserObj();
+      $scope.max = 1;
+      $scope.isReadonly = false;
+      $scope.ratingStates = [{
+        stateOn: 'glyphicon-star',
+        stateOff: 'glyphicon-star-empty'
+      }];
 
       /**
        * This function checks whether the user starred the workflow/tool
@@ -47,6 +54,7 @@ angular.module('dockstore.ui')
           .then(
             function(starring) {
               for (var star in starring) {
+              console.log("does " + userObj.id + " match " + starring[star].id);
                 if (userObj.id === starring[star].id) {
                   return 1;
                 }
@@ -127,29 +135,15 @@ angular.module('dockstore.ui')
           );
       };
 
-      $scope.userObj = UserService.getUserObj();
-      if ((typeof $scope.workflowObj) !== 'undefined') {
-        $scope.entryId = $scope.workflowObj.id;
-        $scope.entryType = 'workflow';
-      } else {
-        $scope.entryId = $scope.containerObj.id;
-        $scope.entryType = 'container';
-      }
-      $scope.getStarring($scope.userObj, $scope.entryId, $scope.entryType).then(function(data) {
-        $scope.rate = data;
-      });
-      $scope.max = 1;
-      $scope.isReadonly = false;
-      $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data) {
-        $scope.total_stars = data;
-      });
-      $scope.hoveringOver = function(value) {
-        $scope.overStar = value;
+      $scope.setDocument = function() {
+        if ((typeof $scope.workflowObj) !== 'undefined') {
+          $scope.entryId = $scope.workflowObj.id;
+          $scope.entryType = 'workflow';
+        } else {
+          $scope.entryId = $scope.containerObj.id;
+          $scope.entryType = 'container';
+        }
       };
-      $scope.ratingStates = [{
-        stateOn: 'glyphicon-star',
-        stateOff: 'glyphicon-star-empty'
-      }];
 
       /**
        * Gets stargazers of this workflow/tool.

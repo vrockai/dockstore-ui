@@ -34,14 +34,9 @@ angular.module('dockstore.ui')
       },
 
       link: function postLink(scope, element, attrs) {
-        scope.$watch('rate', function(newValue, oldValue) {
+        scope.$watch('containerObj', function(newValue, oldValue) {
           if (newValue !== oldValue) {
-            // scope.setStarring(scope.userObj, scope.entryId, scope.entryType);
-          }
-        });
-        scope.$watch('containerObj.id', function(newValue, oldValue) {
-          if (newValue !== oldValue) {
-            scope.entryId = newValue;
+            scope.setDocument();
             scope.getStarring(scope.userObj, scope.entryId, scope.entryType).then(function(data) {
               scope.rate = data;
             });
@@ -50,9 +45,9 @@ angular.module('dockstore.ui')
             });
           }
         });
-        scope.$watch('workflowObj.id', function(newValue, oldValue) {
+        scope.$watch('workflowObj', function(newValue, oldValue) {
           if (newValue !== oldValue) {
-            scope.entryId = newValue;
+            scope.setDocument();
             scope.getStarring(scope.userObj, scope.entryId, scope.entryType).then(function(data) {
               scope.rate = data;
             });
