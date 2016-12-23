@@ -71,6 +71,7 @@
       {{
         (containerObj.tool_path)
       }} <button class="btn btn-default" ngclipboard data-clipboard-target="#tool-path" ngclipboard-success="onSuccess(e);" ngclipboard-error="onError(e);"><span class="glyphicon glyphicon-copy"></span></button>
+      <starring ng-if="!editMode" container-obj="containerObj" star-gazers="starGazers"></starring>
     </h3>
     <div ng-if="containerObj" id="label-holder">
       <div id="label-values">
@@ -150,8 +151,6 @@
     </h3>
   </div>
 </div>
-<starring ng-if="!editMode" container-obj="containerObj" star-gazers="starGazers"></starring>
-
 <stargazers container-obj="containerObj" star-gazers="starGazers" ng-if="starGazers.clicked"></stargazers>
 <div class="row" ng-show="containerObj" ng-if="!starGazers.clicked">
   <div class="ds-tabs" ng-class="editMode ? 'col-md-12' : 'col-md-9'">
