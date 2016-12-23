@@ -41,5 +41,15 @@ angular.module('dockstore.ui')
       UserService.getStarredTools().then(function(data) {
         $scope.starredTools = data;
       });
+
+      /**
+       * This function determines if the current user owns the entry with the given Id
+       *
+       * @param  {Int} entryId   The ID of the workflow or tool
+       * @return {Boolean}       If the user owns the entry given
+       */
+       $scope.isOwner = function(entryId) {
+          return false;
+       };
     }
   ]);
