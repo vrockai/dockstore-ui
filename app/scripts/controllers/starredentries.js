@@ -37,11 +37,9 @@ angular.module('dockstore.ui')
       UserService, NtfnService, ContainerService, WorkflowService) {
       UserService.getStarredWorkflows().then(function(data) {
         $scope.starredWorkflows = data;
-        console.log($scope.starredWorkflows);
       });
       UserService.getStarredTools().then(function(data) {
         $scope.starredTools = data;
-        console.log($scope.starredTools);
       });
     }
   ]);
