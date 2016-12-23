@@ -37,11 +37,19 @@ angular.module('dockstore.ui')
       UserService, NtfnService, ContainerService, WorkflowService) {
       UserService.getStarredWorkflows().then(function(data) {
         $scope.starredWorkflows = data;
-        console.log($scope.starredWorkflows);
       });
       UserService.getStarredTools().then(function(data) {
         $scope.starredTools = data;
-        console.log($scope.starredTools);
       });
+
+      /**
+       * This function determines if the current user owns the entry with the given Id
+       *
+       * @param  {Int} entryId   The ID of the workflow or tool
+       * @return {Boolean}       If the user owns the entry given
+       */
+       $scope.isOwner = function(entryId) {
+          return false;
+       };
     }
   ]);

@@ -3,9 +3,9 @@
     <h3>Stargazers</h3>
     <div class="panel-body">
       <div ng-repeat="stargazer in starGazers.users">
-        <div class="thumbnail col-md-3">
-          <img ng-if="stargazer.gravatarUrl" src={{stargazer.gravatarUrl}}/>
-          <img ng-if="!stargazer.gravatarUrl" src={{stargazer.avatarUrl}}/>
+        <div class="col-md-3">
+          <img ng-if="stargazer.gravatarUrl" ng-src="{{stargazer.gravatarUrl}}" width="175px" height="175px"/>
+          <img ng-if="!stargazer.gravatarUrl" ng-src="{{stargazer.avatarUrl}}" width="175px" height="175px"/>
           <div class="caption">
             <h5>{{stargazer.username}}</h5>
           </div>

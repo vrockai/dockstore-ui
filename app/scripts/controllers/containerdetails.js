@@ -729,8 +729,14 @@ angular.module('dockstore.ui')
         }
       };
 
+
       $scope.stripMailTo = function(email) {
-        return email.replace(/^mailto:/, '');
+        if (email !== null && email !== undefined) {
+          return email.replace(/^mailto:/, '');
+        } else {
+          // Return not available if email is null
+          return "n/a"
+        }
       };
 
       $scope.dockerRegistryMap = FrmttSrvc.returnDockerRegistryList();

@@ -14,12 +14,18 @@
   <div class="row">
     <h3>Starred Tools</h3>
     <div ng-repeat="entries in starredTools">
-      <div ng-if="entries.is_published" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+      <div ng-if="entries.is_published || isOwner(entries.id)" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
       <div class="panel panel-default">
         <div class="panel-body">
+          <span class="label"
+                ng-class="entries.is_published ? 'label-primary' : 'label-warning'"
+                title="{{ entries.is_published ? 'Published' : 'Unpublished' }}"
+                uib-tooltip>
+                  {{ entries.is_published ? 'PUB' : 'UNPUB' }}
+          </span>
           <starring class="pull-right" container-obj="entries"></starring>
           <h3><a href="/containers/{{entries.tool_path}}">{{entries.name}}</a></h3>
-          <p>{{entries.namespace}}</p>
+          <p class="update">By {{entries.namespace}}</p>
           <p>source-code-repository</p>
           <p>registry</p>
         </div>
@@ -34,12 +40,18 @@
 <div class="row">
   <h3>Starred Workflows</h3>
   <div ng-repeat="entries in starredWorkflows">
-    <div ng-if="entries.is_published" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+    <div ng-if="entries.is_published || isOwner(entries.id)" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
     <div class="panel panel-default">
       <div class="panel-body">
         <starring class="pull-right" workflow-obj="entries"></starring>
+        <span class="label"
+              ng-class="entries.is_published ? 'label-primary' : 'label-warning'"
+              title="{{ entries.is_published ? 'Published' : 'Unpublished' }}"
+              uib-tooltip>
+                  {{ entries.is_published ? 'PUB' : 'UNPUB' }}
+          </span>
         <h3><a href="/workflows/{{entries.path}}">{{entries.repository}}</a></h3>
-        <p>{{entries.organization}}</p>
+        <p class="update">By {{entries.organization}}</p>
         <p>source-code-repository</p>
         <p>registry</p>
       </div>
@@ -47,22 +59,4 @@
     </div>
   </div>
 </div>
-
-<!-- <div ng-repeat="entries in starredWorkflows" class="col-md-4" styles="padding:0px;">
-  <div ng-if="starredWorkflows.length>0" class="panel panel-default " style="margin:5px">
-    <div class="code-holder panel-body" style="margin:10px">
-      <div ng-if="entries.repository" class="row" style="padding-left:1px;padding-right:1px; padding-top:2px;padding-bottom:2px;">
-        <starring class="code-copy-button" workflow-obj="entries"></starring>
-        <h5>{{entries.repository}}</h5>
-        <p>{{entries.organization}}</p>
-        <p>source-code-repository</p>
-        <p>registry</p>
-      </div>
-    </div>
-  </div>
-  <div class="alert alert-info" role="alert" ng-if="starredWorkflows.length==0">
-    <span class="glyphicon glyphicon-warning-sign"></span>
-    There are no starred workflows for this user.
-  </div>
-</div> -->
 </div>
