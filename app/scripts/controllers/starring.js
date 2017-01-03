@@ -149,7 +149,10 @@ angular.module('dockstore.ui')
           $scope.entryType = 'container';
         }
       };
-      const gravatarUrl = (email, defaultImg) => ("https://www.gravatar.com/avatar/" + md5.createHash(email) + "?d=" + defaultImg);
+      var gravatarUrl = function(email, defaultImg) {
+        return "https://www.gravatar.com/avatar/" + md5.createHash(email) + "?d=" + defaultImg;
+      };
+      //const gravatarUrl = (email, defaultImg) => ("https://www.gravatar.com/avatar/" + md5.createHash(email) + "?d=" + defaultImg);
       /**
        * Gets stargazers of this workflow/tool.
        *
