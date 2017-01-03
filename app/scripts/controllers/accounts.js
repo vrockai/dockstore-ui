@@ -40,9 +40,8 @@ angular.module('dockstore.ui')
 
       $scope.syncingWithGithub = false;
       $scope.userObj = UserService.getUserObj();
-      console.log($scope.userObj)
       const gravatarUrl = (email, defaultImg) => ("https://www.gravatar.com/avatar/" + md5.createHash(email) + "?d=" + defaultImg);
-      $scope.userObj.avatarUrl = gravatarUrl($scope.userObj.email, $scope.userObj.avatarUrl)
+      $scope.userObj.avatarUrl = gravatarUrl($scope.userObj.email, $scope.userObj.avatarUrl);
 
       $scope.linkGitHubAccount = function() {
         UserService.logout({

@@ -1,3 +1,24 @@
+<style>
+  h1.panel-title {
+    font-size: 36px;
+}
+h2.panel-title {
+    font-size: 30px;
+}
+h3.panel-title {
+    font-size: 24px;
+}
+h4.panel-title {
+    font-size: 18px
+}
+h5.panel-title {
+    font-size: 14px
+}
+h6.panel-title {
+    font-size: 10px;
+}
+</style>
+
 <div id="container-header">
   <div class="container">
     <div class="row">
@@ -16,6 +37,9 @@
     <div ng-repeat="entries in starredTools">
       <div ng-if="entries.is_published || isOwner(entries.id)" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
       <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><a href="/containers/{{entries.tool_path}}">{{entries.name + (entries.toolname ? '/' + entries.toolname : '')}}</a></h3>
+        </div>
         <div class="panel-body">
           <span class="label"
                 ng-class="entries.is_published ? 'label-primary' : 'label-warning'"
@@ -24,7 +48,6 @@
                   {{ entries.is_published ? 'PUB' : 'UNPUB' }}
           </span>
           <starring class="pull-right" container-obj="entries"></starring>
-          <h3><a href="/containers/{{entries.tool_path}}">{{entries.name}}</a></h3>
           <p class="update">By {{entries.namespace}}</p>
           <p>source-code-repository</p>
           <p>registry</p>
@@ -42,6 +65,9 @@
   <div ng-repeat="entries in starredWorkflows">
     <div ng-if="entries.is_published || isOwner(entries.id)" class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
     <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><a href="/workflows/{{entries.path}}">{{entries.repository + (entries.workflowName ? ' (' + entries.workflowName + ')' : '')}}</a></h3>
+      </div>
       <div class="panel-body">
         <starring class="pull-right" workflow-obj="entries"></starring>
         <span class="label"
@@ -50,7 +76,6 @@
               uib-tooltip>
                   {{ entries.is_published ? 'PUB' : 'UNPUB' }}
           </span>
-        <h3><a href="/workflows/{{entries.path}}">{{entries.repository}}</a></h3>
         <p class="update">By {{entries.organization}}</p>
         <p>source-code-repository</p>
         <p>registry</p>
