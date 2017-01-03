@@ -38,7 +38,6 @@ angular.module('dockstore.ui')
       UserService, NtfnService, ContainerService, WorkflowService, FrmttSrvc) {
       UserService.getStarredWorkflows().then(function(data) {
         $scope.starredWorkflows = data;
-        console.log($scope.starredWorkflows)
         $scope.starredWorkflows.forEach(function(workflow) {
           workflow.gitReposProvider = $scope.getGitReposProvider(
             workflow.gitUrl);
@@ -48,7 +47,6 @@ angular.module('dockstore.ui')
             workflow.gitUrl,
             workflow.gitReposProvider);
         });
-        console.log($scope.starredWorkflows)
       });
       UserService.getStarredTools().then(function(data) {
         $scope.starredTools = data;
@@ -69,7 +67,6 @@ angular.module('dockstore.ui')
             tool.path,
             tool.imageReposProvider);
         });
-        console.log($scope.starredTools)
       });
 
       $scope.getGitReposProvider = FrmttSrvc.getGitReposProvider;
