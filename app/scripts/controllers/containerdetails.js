@@ -735,7 +735,7 @@ angular.module('dockstore.ui')
           return email.replace(/^mailto:/, '');
         } else {
           // Return not available if email is null
-          return "n/a"
+          return "n/a";
         }
       };
 

@@ -31,7 +31,8 @@ angular.module('dockstore.ui')
     '$auth',
     'UserService',
     'StarringService',
-    function($scope, $q, $auth, UserService, StarringService) {
+    'md5',
+    function($scope, $q, $auth, UserService, StarringService, md5) {
       $scope.userObj = UserService.getUserObj();
       $scope.max = 1;
       $scope.isReadonly = false;
@@ -39,7 +40,9 @@ angular.module('dockstore.ui')
         stateOn: 'glyphicon-star',
         stateOff: 'glyphicon-star-empty'
       }];
-
+      $scope.isLoggedIn = function() {
+        return !($scope.userObj === null || $scope.userObj === undefined);
+      };
       /**
        * This function checks whether the user starred the workflow/tool
        *
@@ -83,11 +86,14 @@ angular.module('dockstore.ui')
        * @return {type}           Void
        */
       $scope.setStarring = function(userObj, entryId, entryType) {
-        $scope.setStar(userObj, entryId, entryType).then(function(data) {
-          $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data2) {
-            $scope.total_stars = data2;
+        if ($scope.isLoggedIn) {
+          $scope.setStar(userObj, entryId, entryType).then(function(data) {
+            $scope.getStarredUsers($scope.userObj, $scope.entryId, $scope.entryType).then(function(data2) {
+              $scope.total_stars = data2;
+            });
           });
-        });
+        }
+
       };
 
       /**
@@ -143,7 +149,7 @@ angular.module('dockstore.ui')
           $scope.entryType = 'container';
         }
       };
-
+      const gravatarUrl = (email, defaultImg) => ("https://www.gravatar.com/avatar/" + md5.createHash(email) + "?d=" + defaultImg);
       /**
        * Gets stargazers of this workflow/tool.
        *
@@ -156,6 +162,9 @@ angular.module('dockstore.ui')
           .then(
             function(starring) {
               $scope.starGazers.users = starring;
+              $scope.starGazers.users.forEach(function(user) {
+              user.avatarUrl = gravatarUrl(user.email, user.avatarUrl);
+              });
               $scope.starGazers.clicked = true;
             },
             function(response) {

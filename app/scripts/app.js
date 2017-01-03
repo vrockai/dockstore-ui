@@ -40,7 +40,8 @@ angular
     'hljs',
     'hc.marked',
     'sn.addthis',
-    'ngclipboard'
+    'ngclipboard',
+    'angular-md5'
   ])
   .config(['$authProvider', 'WebService',
     function($authProvider, WebService) {
