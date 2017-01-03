@@ -33,14 +33,51 @@ angular.module('dockstore.ui')
     'NotificationService',
     'ContainerService',
     'WorkflowService',
+    'FormattingService',
     function($scope, $auth, $location, $window,
-      UserService, NtfnService, ContainerService, WorkflowService) {
+      UserService, NtfnService, ContainerService, WorkflowService, FrmttSrvc) {
       UserService.getStarredWorkflows().then(function(data) {
         $scope.starredWorkflows = data;
+        console.log($scope.starredWorkflows)
+        $scope.starredWorkflows.forEach(function(workflow) {
+          workflow.gitReposProvider = $scope.getGitReposProvider(
+            workflow.gitUrl);
+          workflow.gitReposProviderName = $scope.getGitReposProviderName(
+            workflow.gitReposProvider);
+          workflow.gitReposWebUrl = $scope.getGitReposWebUrl(
+            workflow.gitUrl,
+            workflow.gitReposProvider);
+        });
+        console.log($scope.starredWorkflows)
       });
       UserService.getStarredTools().then(function(data) {
         $scope.starredTools = data;
+        $scope.starredTools.forEach(function(tool) {
+          tool.gitReposProvider = $scope.getGitReposProvider(
+            tool.gitUrl);
+          tool.gitReposProviderName = $scope.getGitReposProviderName(
+            tool.gitReposProvider);
+          tool.gitReposWebUrl = $scope.getGitReposWebUrl(
+            tool.gitUrl,
+            tool.gitReposProvider);
+          /* Image Repository */
+          tool.imageReposProvider = $scope.getImageReposProvider(
+            tool.path);
+          tool.imageReposProviderName = $scope.getImageReposProviderName(
+            tool.imageReposProvider);
+          tool.imageReposWebUrl = $scope.getImageReposWebUrl(
+            tool.path,
+            tool.imageReposProvider);
+        });
+        console.log($scope.starredTools)
       });
+
+      $scope.getGitReposProvider = FrmttSrvc.getGitReposProvider;
+      $scope.getGitReposProviderName = FrmttSrvc.getGitReposProviderName;
+      $scope.getGitReposWebUrl = FrmttSrvc.getGitReposWebUrl;
+      $scope.getImageReposProvider = FrmttSrvc.getImageReposProvider;
+      $scope.getImageReposProviderName = FrmttSrvc.getImageReposProviderName;
+      $scope.getImageReposWebUrl = FrmttSrvc.getImageReposWebUrl;
 
       /**
        * This function determines if the current user owns the entry with the given Id
@@ -48,8 +85,8 @@ angular.module('dockstore.ui')
        * @param  {Int} entryId   The ID of the workflow or tool
        * @return {Boolean}       If the user owns the entry given
        */
-       $scope.isOwner = function(entryId) {
-          return false;
-       };
+      $scope.isOwner = function(entryId) {
+        return false;
+      };
     }
   ]);
