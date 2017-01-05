@@ -150,7 +150,12 @@ angular.module('dockstore.ui')
         }
       };
       var gravatarUrl = function(email, defaultImg) {
-        return "https://www.gravatar.com/avatar/" + md5.createHash(email) + "?d=" + defaultImg;
+        if (email) {
+          return "https://www.gravatar.com/avatar/" + md5.createHash(email) + "?d=" + defaultImg;
+        }
+        else {
+          return defaultImg;
+        }
       };
       //const gravatarUrl = (email, defaultImg) => ("https://www.gravatar.com/avatar/" + md5.createHash(email) + "?d=" + defaultImg);
       /**
