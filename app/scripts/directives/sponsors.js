@@ -19,9 +19,11 @@
 /**
  * @ngdoc directive
  * @name dockstore.ui.directive:sponsors
+ * @restrict AE
  * @description
  * # sponsors
  */
+
 angular.module('dockstore.ui')
   .directive('sponsors', function() {
     return {

@@ -19,6 +19,7 @@
 /**
  * @ngdoc directive
  * @name dockstore.ui.directive:starring
+ * @restrict AE
  * @description
  * # starring
  */

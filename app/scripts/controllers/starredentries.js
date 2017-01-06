@@ -17,8 +17,8 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name dockstore.ui.controller:starredEntries
+ * @ngdoc controller
+ * @name dockstore.ui.controller:StarredEntriesCtrl
  * @description
  * # StarredEntriesCtrl
  * Controller of the dockstore.ui
@@ -76,10 +76,14 @@ angular.module('dockstore.ui')
       $scope.getImageReposProviderName = FrmttSrvc.getImageReposProviderName;
       $scope.getImageReposWebUrl = FrmttSrvc.getImageReposWebUrl;
 
-      /**
+    /**
+      * @ngdoc method
+      * @name isOwner
+      * @methodOf dockstore.ui.controller:StarredEntriesCtrl
+      * @description
        * This function determines if the current user owns the entry with the given Id
        *
-       * @param  {Int} entryId   The ID of the workflow or tool
+       * @param  {number} entryId   The ID of the workflow or tool
        * @return {Boolean}       If the user owns the entry given
        */
       $scope.isOwner = function(entryId) {
