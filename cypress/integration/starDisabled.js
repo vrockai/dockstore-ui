@@ -2,6 +2,7 @@ global.baseUrl = "http://localhost:9000";
 
 describe('Workflow starring while not logged in', function() {
   beforeEach(function() {
+    cy.clearLocalStorage()
     cy.visit(String(global.baseUrl) + "/workflows/A/l")
   });
 
@@ -20,6 +21,7 @@ describe('Workflow starring while not logged in', function() {
 
 describe('Tool starring while not logged in', function() {
   beforeEach(function() {
+    cy.clearLocalStorage()
     cy.visit(String(global.baseUrl) + "/containers/quay.io/A2/a")
   });
 
