@@ -159,7 +159,6 @@
             </label>
             <div class="col-sm-9">
               <input
-                  ng-model="fields.one"
                   type="text"
                   class="form-control"
                   name="cwl_path"
@@ -167,7 +166,7 @@
                   ng-minlength="3"
                   ng-maxlength="128"
                   ng-pattern="/^\/([^\\\/\?\:\*\|\<\>]+\/)*[^\\\/\?\:\*\|\<\>]+\.(cwl|yaml|yml)/i"
-                  ng-required="!(fields.one.length || fields.two.length)"
+                  ng-required="!(tagObj.cwl_path.length || tagObj.wdl_path.length)"
                  uib-tooltip
                   title="Relative path to the CWL Descriptor in the Git repository."
                   placeholder="e.g. /Dockstore.cwl"
@@ -187,7 +186,6 @@
             </label>
             <div class="col-sm-9">
               <input
-              ng-model="fields.two"
                 type="text"
                 class="form-control"
                 name="wdl_path"
@@ -195,7 +193,7 @@
                 ng-minlength="3"
                 ng-maxlength="128"
                 ng-pattern="/^\/([^\\\/\?\:\*\|\<\>]+\/)*[^\\\/\?\:\*\|\<\>]+\.wdl$/i"
-                ng-required="!(fields.one.length || fields.two.length)"
+                ng-required="!(tagObj.cwl_path.length || tagObj.wdl_path.length)"
                uib-tooltip
                 title="Relative path to the WDL Descriptor in the Git repository."
                 placeholder="e.g. /Dockstore.wdl"
