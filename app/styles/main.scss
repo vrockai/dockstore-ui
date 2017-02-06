@@ -84,9 +84,6 @@ body {
   .button {
     margin: 5px;
   }
-  .youtube {
-    margin-top: 20px;
-  }
   img.blue-rectangle {
     position: absolute;
     right: 0px;
@@ -1047,5 +1044,13 @@ html, body {
   border: 2px solid white;
   color: white;
 }
+
+
+#documentationPage img {
+  max-width: 100%;
+  height: auto;
+  display:block;
+}
+
 
 /* End Temporary Styles - Need to Refactor Later */

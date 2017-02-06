@@ -17,28 +17,21 @@
 'use strict';
 
 /**
- * @ngdoc function
- * @name dockstore.ui.controller:DocumentationCtrl
+ * @ngdoc directive
+ * @name dockstore.ui.directive:sponsors
  * @description
- * # DocumentationCtrl
- * Controller of the dockstore.ui
+ * # sponsors
  */
 angular.module('dockstore.ui')
-  .controller('DocumentationCtrl', [
-    '$scope',
-    '$sce',
-    'DocumentationService',
-    function ($scope, $sce, DocumentationService) {
-
-      $scope.$on('ngRepeatFinished', function(ngRepeatFinishedEvent) {
-          var navSelector = '#toc';
-          var $myNav = $(navSelector);
-          Toc.init($myNav);
-          $('body').scrollspy({
-            target: navSelector
+  .directive('onFinishRender', function($timeout) {
+    return {
+      restrict: 'A',
+      link: function postLink(scope, element, attr) {
+        if (scope.$last === true) {
+          $timeout(function () {
+              scope.$emit(attr.onFinishRender);
           });
-      });
-
-      $scope.docObjs = DocumentationService.getDocumentObjs();
-  }]);
-
+        }
+      }
+    };
+  });
