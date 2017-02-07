@@ -1028,6 +1028,8 @@ html, body {
   height:100%;
 }
 
+/* Video Button */
+
 .youtube, .youtube:active, .youtube:focus {
   text-transform: uppercase;
   padding: 8px 22px;
@@ -1045,6 +1047,7 @@ html, body {
   color: white;
 }
 
+/* Responsive Images in Documentation Page */
 
 #documentationPage img {
   max-width: 100%;
@@ -1052,5 +1055,10 @@ html, body {
   display:block;
 }
 
+#toc {
+  width: auto;
+  top: auto;
+  bottom: 200px;
+}
 
 /* End Temporary Styles - Need to Refactor Later */
